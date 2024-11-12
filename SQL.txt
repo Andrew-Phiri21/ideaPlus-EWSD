@@ -1,0 +1,111 @@
+
+Create TABLE department (
+	deptID int auto_increment,
+	deptName varchar(50),
+	PRIMARY KEY(deptID))
+	ENGINE=InnoDB;
+
+
+CREATE TABLE user (
+  userID int auto_increment,
+  deptID int,
+  fName varchar(30),
+  lName varchar(30),
+  username varchar(30) UNIQUE,
+  role varchar(30),
+  email varchar(50),
+  password varchar(50),
+  isDisabled tinyint(1),
+  isEnabled varchar(1),
+  PRIMARY KEY(userID),
+  FOREIGN KEY(deptID) references department(deptID)) 
+  ENGINE=InnoDB;
+
+ 
+
+create table idea (
+	ideaID int auto_increment,
+	userID int,
+	ideaTitle varchar(100),
+	ideaDetails varchar(500),
+	datePosted datetime default Now(),
+	hasAttach boolean DEFAULT 0,
+	views int DEFAULT 0,
+	ratings int DEFAULT 0,
+	isAnon boolean DEFAULT 0,
+	PRIMARY KEY(ideaID),
+	FOREIGN KEY(userID) references user(userID))
+	ENGINE=InnoDB;
+	
+create table comments (
+	commentID int auto_increment,
+	commentDetails varchar(500),
+	commentType varchar(10),
+	commentDate datetime default Now(),
+	isAnon boolean DEFAULT 0,
+	ideaID int,
+	userID int,
+	PRIMARY KEY(commentID),
+	FOREIGN Key(userID) references user(userID),
+	FOREIGN Key(ideaID) references idea(ideaID))
+	ENGINE=InnoDB;
+
+	
+create table userRatings (
+	userID int,
+	ideaID int,
+	rating int,
+	PRIMARY Key(userID,ideaID),
+	FOREIGN Key(userID) references user(userID),
+	FOREIGN Key(ideaID) references idea(ideaID))
+	ENGINE=InnoDB;
+	
+create table attached (
+	fileID int auto_increment,
+	ideaID	int,
+	sourceFile varchar(250),
+	PRIMARY Key(fileID),
+	FOREIGN Key(ideaID) references idea(ideaID))
+	ENGINE=InnoDB;
+	
+	
+Create table category (
+	catID int auto_increment,
+	catName varchar(15),
+	PRIMARY Key(catID))
+	ENGINE=InnoDB;
+
+		
+Create table ideaCat (
+	catID int,
+	ideaID int,
+	PRIMARY Key(catID,ideaID),
+	FOREIGN Key(catID) references category(catID),
+	FOREIGN KEY(ideaID) references idea(ideaID))
+	ENGINE=InnoDB;
+	
+
+INSERT into department(deptName) VALUES
+('Accounts'),
+('Human Resources'),
+('Procurement'),
+('Library'),
+('Administration');
+
+
+
+INSERT into user(deptID, fName, lName, username, role, email, password, isDisabled, isEnabled) VALUES
+(1, 'Andrew', 'Phiri', 'Drew', 'Admin', 'group3ewsd@gmail.com', 'e64b78fc3bc91bcbc7dc232ba8ec59e0', '0', '1');
+
+	
+INSERT into category(catName) VALUES
+('Facilities');
+
+
+
+create table dates
+(ideaClosure date,
+ finalClosure date);
+
+insert into dates values('2024-11-15','2024-11-16');
+
