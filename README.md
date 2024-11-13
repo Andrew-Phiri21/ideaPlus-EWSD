@@ -8,7 +8,8 @@
 ------------------------------------------------------------------------
                             INSTRUCTIONS
 ------------------------------------------------------------------------
-> Copy the files for ideaplus into your Xampp folder called htdocs
+> Download ideaPlus.rar
+<br> Copy the files for ideaplus into your Xampp folder called htdocs
 <br> Deploy database, name = ideas
 <br> in your browser, use the url: localhost/ideaplus/
 <br> Log in as Admin
